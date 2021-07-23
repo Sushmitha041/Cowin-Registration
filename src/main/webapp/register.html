@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <title>coWIN Registration</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs//jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/forge/0.8.2/forge.all.min.js"></script>
+        <link rel="stylesheet" href="style2.css">
+    </head>
+    <body>
+    <nav class="navbar fixed-top navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">CoWIN Registration</span>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item " role="presentation">
+    <button class="nav-link" id="question-tab" data-bs-toggle="tab" data-bs-target="#question" type="button" role="tab" aria-controls="profile"><a href="http://127.0.0.1:5000/chat" target="_blank">ChatHere</a></button>
+  </li>
+  <li class="nav-item " role="presentation">
+    <a href="contact.html"><button class="nav-link"  aria-selected="false">About Us</button></a>
+  </li>
+</ul>
+</nav>
+    
+        <div >
+                <fieldset class="form-group border p-3 reg"><legend class="w-auto px-2"><b>Register or Sign-In</b></legend>
+                <label >Enter you mobile number</label>
+                <br>
+                <br>
+                <input type="text" class="enter" name="num" id="num">
+                <br>
+                <br>
+                <input type="submit" class="button btn btn-primary" name="btn" id="btn" value="Get OTP">
+                <br>
+                <br>
+                <br>
+                <div class="otp-section">
+                <label>An OTP has been sent to<br>mobile  <span id="number"></span></label>
+                <br>
+                <br>
+                <input type="number" class="confirm-otp" name="pnum" id="pnum">
+                <br>
+                <br>
+                <input  type="submit" class="confirm-btn btn btn-primary" name="pbtn" id="pbtn" value="Proceed">
+            </div>
+            <div></div>
+            </fieldset>
+        </div>
+        <script>
+            var transID;
+            $(document).ready(function(){
+                $('.button').on('click',function(){
+      
+                	  var phoneno = /^\d{10}$/;
+                	  if((num.value.match(phoneno)))
+                	   {
+                		  var phone=$('.enter').val();
+                          console.log(phone);
+                          var enterednumber = "******"+String(phone).substr(6,9);
+                          document.getElementById("number").innerHTML = enterednumber;
+                          var requestdata={'mobile':phone};
+                          $.ajax({
+                  url:"https://cdn-api.co-vin.in/api/v2/auth/public/generateOTP",
+                  type:'POST',
+                  data:JSON.stringify(requestdata),
+                  contentType: 'application/json',
+                  success: function(results)
+                  {
+                      $(".otp-section").show(); 
+                      
+                      transId=results;
+                      console.log(results); 
+                  },
+                  error:function(){
+                      $(".otp-section").show(); 
+                  }
+                  });
+                 
+                	        }
+                	      else
+                	        {
+                	        alert("Enter 10 digit number");
+                	        return false;
+                	        }
+                });
+
+            $('.confirm-btn').on('click',function(){
+                var otp=$('.confirm-otp').val();
+                console.log(otp);
+                console.log('success');
+                var md = forge.md.sha256.create();  
+                md.start();  
+                md.update(otp, "utf8");  
+                var hashText = md.digest().toHex();
+
+                var requestdata = {'otp':hashText,'txnId': transId.txnId};
+                $.ajax({
+                    url: "https://cdn-api.co-vin.in/api/v2/auth/public/confirmOTP",
+                    type:"POST" ,
+                    data:JSON.stringify(requestdata),
+                    contentType: 'application/json',
+                    success: function(results)
+                    {
+                        	console.log(results);
+                            alert("registration successfull");
+                            window.location.href="displayandschedule.jsp";
+                    },
+                    error:function(){
+                    	console.log("Failure");
+                    	alert("Registration Failed try again later!");
+                }
+                });
+            });
+        });
+            </script>
+    </body>
+</html>

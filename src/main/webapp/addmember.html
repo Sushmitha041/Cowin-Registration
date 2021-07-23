@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Member Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <nav class="navbar fixed-top navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">CoWIN Registration</span>
+</nav> 
+    
+    
+    
+    
+    <div>
+    
+    <form action="addingtodb.jsp" method="post">
+    <label>Member Details</label>
+    <hr>
+    <br>
+    <label><b>Photo ID Proof</b></label>
+    <br>
+    <select placeholder="Select" name="Select" id="Select" required>
+    	<option >Select </option>
+        <option  value="Aadaar">Aadaar Card</option>
+        <option  value="Pan">Pan Card</option>
+        <option  value="license">Driving License</option>
+        <option  value="vote">Voter Id Proof</option>
+    </select>
+    <br>
+    <br>
+    <label ><b>Photo ID Number</b></label>
+    <br>
+    <input placeholder="Enter Id number" type="number" name="pid" class="inp" value="pid" id="pid" required>
+    <br>
+    <br>
+    <label><b>Name</b></label>
+    <br>
+    <input placeholder="Enter Name" type="text" class="inp" name="uname"  id="uname" required>
+    <br>
+    <br>
+    <label><b>Gender</b></label>
+    <br>
+    <input type="radio" name="gender" id="gender" value="male" required>
+    <label class="gender">Male</label>
+    <input type="radio" name="gender" id="gender" value="female" required>
+    <label class="gender">Female</label>
+    <input type="radio" name="gender" id="gender" value="other" required>
+    <label class="gender">Others</label>
+    
+    <br>
+    <br>
+    <label><b>Year or Birth</b></label>
+    <br>
+    <input placeholder="Enter year" required type="month" class="inp" name="dob" id="dob" value="dob">
+    <br>
+    <br>
+    <hr class="htext">
+    <br>
+    <input type="submit" class="sbtn" name="Add member" value="Add Member">
+    </form>
+    </div>
+    
+</body>
+</html>

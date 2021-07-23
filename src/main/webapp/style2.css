@@ -1,0 +1,31 @@
+fieldset{
+  border: 1px solid black;
+  width: 350px;
+  height: 300px;
+  margin:auto;
+
+}
+form
+{
+    text-align: center;
+}
+legend
+{
+    color: blue;
+    text-align: left;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.otp-section{
+display: none;
+
+}
+
+.reg
+{
+	margin: 10% auto ;
+	height: 420px;
+}
